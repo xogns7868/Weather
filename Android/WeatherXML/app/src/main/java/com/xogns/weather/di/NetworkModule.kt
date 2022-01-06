@@ -1,4 +1,4 @@
-package com.xogns.weather.data
+package com.xogns.weather.di
 
 import com.google.gson.GsonBuilder
 import com.xogns.weather.BuildConfig
@@ -9,7 +9,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val NetworkModule = module {
+val networkModule = module {
     single {
         Interceptor { chain ->
             chain.proceed(chain.request().newBuilder().apply {
