@@ -13,7 +13,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var num: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        textField.delegate = self
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func textFieldDidChange(_ sender: Any?) {
+        print("textEditing = \((self.textField.text) ?? "Empty")")
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -22,6 +28,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textEnd: \((textField.text) ?? "Empty")")
+        numLabel.text = textField.text
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -35,4 +42,3 @@ class ViewController: UIViewController, UITextFieldDelegate {
         numLabel.text = String(num)
     }
 }
-
