@@ -2,7 +2,7 @@
 //  DaySummaryViewModel.swift
 //  WeatherStoryboard
 //
-//  Created by tom.7868 on 2022/01/22.
+//  Created by xogns.7868 on 2022/01/22.
 //
 
 import Foundation

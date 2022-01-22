@@ -2,7 +2,7 @@
 //  DataManager.swift
 //  WeatherStoryboard
 //
-//  Created by tom.7868 on 2021/12/25.
+//  Created by xogns.7868 on 2021/12/25.
 //
 
 import Foundation
