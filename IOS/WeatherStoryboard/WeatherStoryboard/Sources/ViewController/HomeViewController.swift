@@ -24,7 +24,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        // Do any additional setup after loading the view.
     }
     
     @objc func textFieldDidChange(_ sender: Any?) {
