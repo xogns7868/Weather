@@ -6,13 +6,22 @@
 //
 
 import UIKit
+import Combine
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class HomeViewController: UIViewController, UITextFieldDelegate {
+    var viewModel: WeatherSummaryViewModel!
+    private var cancellables: Set<AnyCancellable> = []
+    
+    
     @IBOutlet weak var numLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     var num: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.$weatherSummary.sink { result in
+            print(result?.latitude)
+        }.store(in: &cancellables)
+        
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         // Do any additional setup after loading the view.
