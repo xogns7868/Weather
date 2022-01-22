@@ -12,7 +12,7 @@ class WeatherSummaryViewModel: ObservableObject {
   private var weatherFetcher: WeatherFetcher
   private var disposable = Set<AnyCancellable>()
   
-  @Published var searchText: String = "Cupertino"
+  @Published var searchText: String = "Seoul"
   @Published var weatherSummary: WeatherSummary?
   
   var currentTempFmt: String {
