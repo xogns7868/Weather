@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.$weatherSummary.sink { result in
-            print(result?.latitude)
+            print(String(result?.latitude ?? 0))
         }.store(in: &cancellables)
         
         textField.delegate = self
