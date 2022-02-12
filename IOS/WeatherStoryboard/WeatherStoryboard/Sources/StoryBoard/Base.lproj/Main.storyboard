@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXJ-xf-0mZ">
-                                <rect key="frame" x="184" y="433" width="46" height="30"/>
+                                <rect key="frame" x="184" y="733.5" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -36,18 +36,39 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAC-yM-50o">
+                                <rect key="frame" x="4" y="142" width="406" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x0F-Va-3vf">
+                                <rect key="frame" x="182" y="182.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="4af-NP-YgG"/>
+                                    <constraint firstAttribute="height" constant="50" id="seH-b6-odw"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="VAC-yM-50o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="4" id="AY5-0N-EM7"/>
+                            <constraint firstItem="VAC-yM-50o" firstAttribute="top" secondItem="zVs-DP-Pmi" secondAttribute="bottom" constant="32" id="BGb-q7-U3i"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VAC-yM-50o" secondAttribute="trailing" constant="4" id="IBN-34-PZf"/>
+                            <constraint firstItem="x0F-Va-3vf" firstAttribute="top" secondItem="VAC-yM-50o" secondAttribute="bottom" constant="20" id="TZB-dW-LYZ"/>
+                            <constraint firstItem="x0F-Va-3vf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dHj-cr-hks"/>
                             <constraint firstItem="zVs-DP-Pmi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="uLq-gZ-xkN"/>
                             <constraint firstItem="zVs-DP-Pmi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="vJA-bY-pwp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zVs-DP-Pmi" secondAttribute="trailing" constant="32" id="xO8-be-tm5"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="currentTempDescription" destination="VAC-yM-50o" id="Mgr-o1-oAf"/>
+                        <outlet property="currentWeatherIcon" destination="x0F-Va-3vf" id="ZSc-L2-2W2"/>
                         <outlet property="numLabel" destination="hp6-pu-ydg" id="guz-z1-1lZ"/>
                         <outlet property="textField" destination="zVs-DP-Pmi" id="c4E-nH-51k"/>
+                        <outletCollection property="currentTempDescription" destination="VAC-yM-50o" id="00M-qF-8ar"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

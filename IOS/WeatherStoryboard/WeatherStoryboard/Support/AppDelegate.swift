@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewModel = WeatherSummaryViewModel(weatherFetcher: dataManager)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateInitialViewController() as? HomeViewController
-        viewController?.viewModel = viewModel
+        viewController?.weatherSummaryViewModel = viewModel
         self.window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()

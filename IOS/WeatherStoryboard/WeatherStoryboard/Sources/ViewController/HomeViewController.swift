@@ -9,25 +9,36 @@ import UIKit
 import Combine
 
 class HomeViewController: UIViewController, UITextFieldDelegate {
-    var viewModel: WeatherSummaryViewModel!
+    var weatherSummaryViewModel: WeatherSummaryViewModel!
+//    var currentSummaryViewModel: CurrentSummaryViewModel!
+    
     private var cancellables: Set<AnyCancellable> = []
     
     
     @IBOutlet weak var numLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var currentTempDescription: UILabel!
+    @IBOutlet weak var currentWeatherIcon: UIImageView!
     var num: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.$weatherSummary.sink { result in
-            print(String(result?.latitude ?? 0))
+        weatherSummaryViewModel.$weatherSummary.sink { result in
+            self.currentTempDescription.text = result?.current.weatherDetails.first?.weatherDescription
+            if let icon = result?.current.weatherDetails.first?.weatherIcon {
+                self.currentWeatherIcon.image = UIImage(named: icon)
+                self.currentWeatherIcon.isHidden = false
+            } else {
+                self.currentWeatherIcon.isHidden = true
+            }
         }.store(in: &cancellables)
         
+        currentTempDescription.textAlignment = .center
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     @objc func textFieldDidChange(_ sender: Any?) {
-        print("textEditing = \((self.textField.text) ?? "Empty")")
+        weatherSummaryViewModel.searchText = self.textField.text ?? "Seoul"
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
