@@ -8,18 +8,31 @@
 import UIKit
 import Combine
 
-class HomeViewController: UIViewController, UITextFieldDelegate {
+class HomeViewController: UIViewController,
+                          UITextFieldDelegate,
+                          UITableViewDelegate,
+                          UITableViewDataSource {
+    
     var weatherSummaryViewModel: WeatherSummaryViewModel!
 //    var currentSummaryViewModel: CurrentSummaryViewModel!
     
     private var cancellables: Set<AnyCancellable> = []
     
-    
-    @IBOutlet weak var numLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var currentTempDescription: UILabel!
     @IBOutlet weak var currentWeatherIcon: UIImageView!
     var num: Int = 0
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
+
+        return cell
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         weatherSummaryViewModel.$weatherSummary.sink { result in
@@ -30,6 +43,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
             } else {
                 self.currentWeatherIcon.isHidden = true
             }
+            self.num = self.weatherSummaryViewModel.hourSummaries.count
         }.store(in: &cancellables)
         
         currentTempDescription.textAlignment = .center
@@ -45,19 +59,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         print("textBegin: \((textField.text) ?? "Empty")")
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("textEnd: \((textField.text) ?? "Empty")")
-        numLabel.text = textField.text
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textShouldReturn: \((textField.text) ?? "Empty")")
         textField.resignFirstResponder()
         return true
-    }
-
-    @IBAction func numUp(_ sender: UIButton) {
-        num += 1
-        numLabel.text = String(num)
     }
 }

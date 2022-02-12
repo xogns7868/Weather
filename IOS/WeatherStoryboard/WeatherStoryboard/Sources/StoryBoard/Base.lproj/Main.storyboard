@@ -16,21 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXJ-xf-0mZ">
-                                <rect key="frame" x="184" y="733.5" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="numUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fDY-Mj-oEU"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hp6-pu-ydg">
-                                <rect key="frame" x="186" y="532" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zVs-DP-Pmi">
                                 <rect key="frame" x="32" y="76" width="350" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -49,16 +34,59 @@
                                     <constraint firstAttribute="height" constant="50" id="seH-b6-odw"/>
                                 </constraints>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X5N-hx-Jkt">
+                                <rect key="frame" x="0.0" y="255" width="414" height="641"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="CustomTableViewCell" id="EUj-n4-IL3" customClass="CustomTableViewCell" customModule="WeatherStoryboard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="50.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EUj-n4-IL3" id="l7V-Rr-fGY">
+                                            <rect key="frame" x="0.0" y="0.0" width="373.5" height="50.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="textview" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="G2V-Sx-dv9">
+                                                    <rect key="frame" x="0.0" y="0.0" width="373.5" height="50.5"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="p8m-tE-joX"/>
+                                                    </constraints>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="G2V-Sx-dv9" secondAttribute="trailing" id="3AW-Kp-GBW"/>
+                                                <constraint firstItem="G2V-Sx-dv9" firstAttribute="leading" secondItem="l7V-Rr-fGY" secondAttribute="leading" id="AEE-py-gAb"/>
+                                                <constraint firstAttribute="bottom" secondItem="G2V-Sx-dv9" secondAttribute="bottom" id="GX2-iv-0zI"/>
+                                                <constraint firstItem="G2V-Sx-dv9" firstAttribute="top" secondItem="l7V-Rr-fGY" secondAttribute="top" id="Pyw-gN-vAd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="customLabel" destination="G2V-Sx-dv9" id="o17-4p-A9R"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="BDs-Gh-90f"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="J18-Ke-918"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="X5N-hx-Jkt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1kZ-km-qfp"/>
                             <constraint firstItem="VAC-yM-50o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="4" id="AY5-0N-EM7"/>
                             <constraint firstItem="VAC-yM-50o" firstAttribute="top" secondItem="zVs-DP-Pmi" secondAttribute="bottom" constant="32" id="BGb-q7-U3i"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VAC-yM-50o" secondAttribute="trailing" constant="4" id="IBN-34-PZf"/>
                             <constraint firstItem="x0F-Va-3vf" firstAttribute="top" secondItem="VAC-yM-50o" secondAttribute="bottom" constant="20" id="TZB-dW-LYZ"/>
                             <constraint firstItem="x0F-Va-3vf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dHj-cr-hks"/>
+                            <constraint firstItem="X5N-hx-Jkt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="deb-yL-fiN"/>
+                            <constraint firstAttribute="bottom" secondItem="X5N-hx-Jkt" secondAttribute="bottom" id="m73-sa-xPM"/>
                             <constraint firstItem="zVs-DP-Pmi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="uLq-gZ-xkN"/>
+                            <constraint firstItem="X5N-hx-Jkt" firstAttribute="top" secondItem="x0F-Va-3vf" secondAttribute="bottom" constant="22.5" id="upc-th-DBg"/>
                             <constraint firstItem="zVs-DP-Pmi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="vJA-bY-pwp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zVs-DP-Pmi" secondAttribute="trailing" constant="32" id="xO8-be-tm5"/>
                         </constraints>
@@ -66,7 +94,6 @@
                     <connections>
                         <outlet property="currentTempDescription" destination="VAC-yM-50o" id="Mgr-o1-oAf"/>
                         <outlet property="currentWeatherIcon" destination="x0F-Va-3vf" id="ZSc-L2-2W2"/>
-                        <outlet property="numLabel" destination="hp6-pu-ydg" id="guz-z1-1lZ"/>
                         <outlet property="textField" destination="zVs-DP-Pmi" id="c4E-nH-51k"/>
                         <outletCollection property="currentTempDescription" destination="VAC-yM-50o" id="00M-qF-8ar"/>
                     </connections>
@@ -112,6 +139,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
