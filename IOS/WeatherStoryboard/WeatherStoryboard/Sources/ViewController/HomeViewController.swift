@@ -9,9 +9,7 @@ import UIKit
 import Combine
 
 class HomeViewController: UIViewController,
-                          UITextFieldDelegate,
-                          UITableViewDelegate,
-                          UITableViewDataSource {
+                          UITextFieldDelegate {
     
     var weatherSummaryViewModel: WeatherSummaryViewModel!
 //    var currentSummaryViewModel: CurrentSummaryViewModel!
@@ -21,17 +19,8 @@ class HomeViewController: UIViewController,
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var currentTempDescription: UILabel!
     @IBOutlet weak var currentWeatherIcon: UIImageView!
-    var num: Int = 0
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
-
-        return cell
-    }
+    @IBOutlet var tableView: UITableView!
+    var num: Int = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +33,12 @@ class HomeViewController: UIViewController,
                 self.currentWeatherIcon.isHidden = true
             }
             self.num = self.weatherSummaryViewModel.hourSummaries.count
+            self.tableView.reloadData()
         }.store(in: &cancellables)
         
         currentTempDescription.textAlignment = .center
+        tableView.delegate = self
+        tableView.dataSource = self
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
@@ -63,5 +55,24 @@ class HomeViewController: UIViewController,
         print("textShouldReturn: \((textField.text) ?? "Empty")")
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("you tapped me!")
+    }
+}
+
+extension HomeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(self.num)
+        return self.num
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
+
+        return cell
     }
 }
