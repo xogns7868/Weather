@@ -20,7 +20,7 @@ class HomeViewController: UIViewController,
     @IBOutlet weak var currentTempDescription: UILabel!
     @IBOutlet weak var currentWeatherIcon: UIImageView!
     @IBOutlet var tableView: UITableView!
-    var num: Int = 3
+    var hourSummaries: [HourSummaryViewModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,27 +32,26 @@ class HomeViewController: UIViewController,
             } else {
                 self.currentWeatherIcon.isHidden = true
             }
-            self.num = self.weatherSummaryViewModel.hourSummaries.count
+        }.store(in: &cancellables)
+        
+        weatherSummaryViewModel.$hourSummaries.sink { result in
+            self.hourSummaries = result
             self.tableView.reloadData()
         }.store(in: &cancellables)
         
         currentTempDescription.textAlignment = .center
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView(frame: .zero)
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     @objc func textFieldDidChange(_ sender: Any?) {
-        weatherSummaryViewModel.searchText = self.textField.text ?? "Seoul"
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("textBegin: \((textField.text) ?? "Empty")")
+        weatherSummaryViewModel.searchText = self.textField.text ?? ""
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("textShouldReturn: \((textField.text) ?? "Empty")")
         textField.resignFirstResponder()
         return true
     }
@@ -66,13 +65,12 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.num)
-        return self.num
+        return self.hourSummaries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
-
+        cell.customLabel?.text = "\(self.hourSummaries[indexPath.row].timeFmt) = \(self.hourSummaries[indexPath.row].tempFmt)"
         return cell
     }
 }

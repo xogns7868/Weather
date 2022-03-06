@@ -12,7 +12,7 @@ class WeatherSummaryViewModel: ObservableObject {
   private var weatherFetcher: WeatherFetcher
   private var disposable = Set<AnyCancellable>()
   
-  @Published var searchText: String = "Seoul"
+  @Published var searchText: String = ""
   @Published var weatherSummary: WeatherSummary?
   
   var currentTempFmt: String {
@@ -36,8 +36,8 @@ class WeatherSummaryViewModel: ObservableObject {
 //    weatherSummary?.current.weatherDetails.first?.weatherIcon
 //  }
   
-  var hourSummaries: [HourSummaryViewModel] = []
-  var daySummaries: [DaySummaryViewModel] = []
+@Published var hourSummaries: [HourSummaryViewModel] = []
+@Published var daySummaries: [DaySummaryViewModel] = []
   
   init(weatherFetcher: WeatherFetcher) {
     self.weatherFetcher = weatherFetcher
