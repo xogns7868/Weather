@@ -71,6 +71,7 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
         cell.customLabel?.text = "\(self.hourSummaries[indexPath.row].timeFmt) = \(self.hourSummaries[indexPath.row].tempFmt)"
+        cell.customLabel?.highlightedTextColor = .brown
         return cell
     }
 }
