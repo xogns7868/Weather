@@ -116,18 +116,18 @@ struct WeatherDetails {
     let weatherIconID: String
     var weatherIcon: String? {
         switch weatherIconID {
-            case "01d": return "sun"
-            case "01n": return "moon"
-            case "02d": return "cloud_sun"
-            case "02n": return "cloud_moon"
-            case "03d", "03n", "04d", "04n": return "cloud_sun"
-            case "09d", "09n": return "cloud_sun_rain"
-            case "10d": return "cloud_sun_rain"
-            case "10n": return "cloud_moon"
-            case "11d", "11n": return "cloud_bolt_rain"
-            case "13d", "13n": return "snow"
-            case "50d", "50n": return "cloud_sun"
-            default: return "sun"
+            case "01d": return "sun.max.fill"
+            case "01n": return "sun.max.fill"
+            case "02d": return "sun.max.fill"
+            case "02n": return "sun.max.fill"
+            case "03d", "03n", "04d", "04n": return "sun.max.fill"
+            case "09d", "09n": return "sun.max.fill"
+            case "10d": return "sun.max.fill"
+            case "10n": return "sun.max.fill"
+            case "11d", "11n": return "sun.max.fill"
+            case "13d", "13n": return "sun.max.fill"
+            case "50d", "50n": return "sun.max.fill"
+            default: return "sun.max.fill"
         }
     }
   

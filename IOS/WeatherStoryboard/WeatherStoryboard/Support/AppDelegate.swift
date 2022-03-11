@@ -14,10 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let dataManager = DataManager()
         let viewModel = WeatherSummaryViewModel(weatherFetcher: dataManager)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateInitialViewController() as? HomeViewController
-        viewController?.weatherSummaryViewModel = viewModel
+        let tabBarController = storyboard.instantiateInitialViewController() as? UITabBarController
+        (tabBarController?.viewControllers?[0] as? HomeViewController)?.weatherSummaryViewModel = viewModel
+    
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = viewController
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
         return true

@@ -25,6 +25,7 @@
 		B870614F279BFD5500DFB70B /* DaySummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870614E279BFD5500DFB70B /* DaySummaryViewModel.swift */; };
 		B8706151279BFD6B00DFB70B /* HourSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8706150279BFD6B00DFB70B /* HourSummaryViewModel.swift */; };
 		B8D3CE5B27B7CD03007D2BC5 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D3CE5A27B7CD03007D2BC5 /* CustomTableViewCell.swift */; };
+		B8EC953827DB86C300CAA8D4 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC953727DB86C300CAA8D4 /* HomeTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		B870614E279BFD5500DFB70B /* DaySummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySummaryViewModel.swift; sourceTree = "<group>"; };
 		B8706150279BFD6B00DFB70B /* HourSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourSummaryViewModel.swift; sourceTree = "<group>"; };
 		B8D3CE5A27B7CD03007D2BC5 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		B8EC953727DB86C300CAA8D4 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 				B83E615327774781006B23DD /* HomeViewController.swift */,
 				B80409CD2792D63300A973B8 /* RoundedTextField.swift */,
 				B8D3CE5A27B7CD03007D2BC5 /* CustomTableViewCell.swift */,
+				B8EC953727DB86C300CAA8D4 /* HomeTabBarController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			files = (
 				B83E619427774A7C006B23DD /* CurrentViewController.swift in Sources */,
 				B870614D279BFD4200DFB70B /* CurrentSummaryViewModel.swift in Sources */,
+				B8EC953827DB86C300CAA8D4 /* HomeTabBarController.swift in Sources */,
 				B83E615427774781006B23DD /* HomeViewController.swift in Sources */,
 				B83E6192277748CD006B23DD /* DataManager.swift in Sources */,
 				B8706151279BFD6B00DFB70B /* HourSummaryViewModel.swift in Sources */,

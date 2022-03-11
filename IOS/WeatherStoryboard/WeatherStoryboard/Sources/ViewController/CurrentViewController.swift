@@ -13,6 +13,7 @@ class CurrentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 2)
     }
     @IBAction func numUp(_ sender: UIButton) {
         num += 1

@@ -27,7 +27,8 @@ class HomeViewController: UIViewController,
         weatherSummaryViewModel.$weatherSummary.sink { result in
             self.currentTempDescription.text = result?.current.weatherDetails.first?.weatherDescription
             if let icon = result?.current.weatherDetails.first?.weatherIcon {
-                self.currentWeatherIcon.image = UIImage(named: icon)
+                self.currentWeatherIcon.image = UIImage(systemName: icon)
+                self.currentWeatherIcon.tintColor = .systemGray
                 self.currentWeatherIcon.isHidden = false
             } else {
                 self.currentWeatherIcon.isHidden = true
@@ -45,6 +46,7 @@ class HomeViewController: UIViewController,
         tableView.tableFooterView = UIView(frame: .zero)
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 1)
     }
     
     @objc func textFieldDidChange(_ sender: Any?) {
