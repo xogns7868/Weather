@@ -11,6 +11,8 @@ class HomeTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewControllers?[0].tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 1)
+        self.viewControllers?[1].tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 2)
     }
     
 

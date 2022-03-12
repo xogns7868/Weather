@@ -8,15 +8,41 @@
 import UIKit
 
 class CurrentViewController: UIViewController {
-    @IBOutlet weak var numLabel: UILabel!
-    var num: Int = 0
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var currentDateLabel: UILabel!
+    @IBOutlet weak var selectedDateLabel: UILabel!
+    var timer: Timer? = nil
+    let dateFormat = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 2)
+        print("viewDidLoad")
+        dateFormat.dateFormat = "yyyy-MM-dd HH:mm ss EEE"
+        datePicker(datePicker)
     }
-    @IBAction func numUp(_ sender: UIButton) {
-        num += 1
-        numLabel.text = String(num)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("viewDidApper")
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            self.timeUpdate()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("viewDidDisapper")
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @IBAction func datePicker(_ sender: UIDatePicker) {
+        let datePicker = sender
+        
+        selectedDateLabel.text = "선택된 날짜: \(dateFormat.string(from: datePicker.date))"
+    }
+    
+    func timeUpdate() {
+        let date = NSDate()
+        currentDateLabel.text = "현재 날짜: \(dateFormat.string(from: date as Date))"
+        datePicker.setDate(date as Date, animated: true)
     }
 }

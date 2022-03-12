@@ -46,7 +46,6 @@ class HomeViewController: UIViewController,
         tableView.tableFooterView = UIView(frame: .zero)
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        self.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 1)
     }
     
     @objc func textFieldDidChange(_ sender: Any?) {

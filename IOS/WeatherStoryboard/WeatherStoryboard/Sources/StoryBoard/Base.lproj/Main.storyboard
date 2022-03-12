@@ -100,17 +100,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8JU-H3-DQ7">
-                                <rect key="frame" x="184" y="433" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="rDd-BY-VZZ">
+                                <rect key="frame" x="0.0" y="94" width="414" height="216"/>
+                                <locale key="locale" localeIdentifier="ko_KR"/>
                                 <connections>
-                                    <action selector="numUp:" destination="laG-od-U5r" eventType="touchUpInside" id="cVT-2u-mDI"/>
+                                    <action selector="datePicker:" destination="laG-od-U5r" eventType="valueChanged" id="XWy-Xm-agT"/>
                                 </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9g-n4-wXq">
-                                <rect key="frame" x="186" y="536" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tci-5o-5Yk">
+                                <rect key="frame" x="50" y="410" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HF1-jX-O8R">
+                                <rect key="frame" x="50" y="481" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -118,15 +122,26 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3Hn-qN-wTq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Tci-5o-5Yk" firstAttribute="top" secondItem="rDd-BY-VZZ" secondAttribute="bottom" constant="100" id="9qy-q6-cXT"/>
+                            <constraint firstItem="rDd-BY-VZZ" firstAttribute="trailing" secondItem="3Hn-qN-wTq" secondAttribute="trailing" id="A3a-VO-rAW"/>
+                            <constraint firstItem="HF1-jX-O8R" firstAttribute="leading" secondItem="3Hn-qN-wTq" secondAttribute="leading" constant="50" id="AXT-zF-mTf"/>
+                            <constraint firstItem="Tci-5o-5Yk" firstAttribute="leading" secondItem="3Hn-qN-wTq" secondAttribute="leading" constant="50" id="FUg-Yc-JUp"/>
+                            <constraint firstItem="rDd-BY-VZZ" firstAttribute="top" secondItem="3Hn-qN-wTq" secondAttribute="top" constant="50" id="Po6-UZ-fue"/>
+                            <constraint firstItem="rDd-BY-VZZ" firstAttribute="leading" secondItem="3Hn-qN-wTq" secondAttribute="leading" id="jcR-TD-xqV"/>
+                            <constraint firstItem="HF1-jX-O8R" firstAttribute="top" secondItem="Tci-5o-5Yk" secondAttribute="bottom" constant="50" id="jvH-XG-fUX"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="MzG-WM-P8S"/>
                     <connections>
-                        <outlet property="numLabel" destination="j9g-n4-wXq" id="xjF-JJ-JMl"/>
+                        <outlet property="currentDateLabel" destination="HF1-jX-O8R" id="m42-5I-SNJ"/>
+                        <outlet property="datePicker" destination="rDd-BY-VZZ" id="V7i-yJ-fEu"/>
+                        <outlet property="selectedDateLabel" destination="Tci-5o-5Yk" id="htw-2y-pPM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w8u-Jh-T67" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1125" y="942"/>
+            <point key="canvasLocation" x="1124.6376811594205" y="941.51785714285711"/>
         </scene>
         <!--Home Tab Bar Controller-->
         <scene sceneID="rwT-f2-dSw">
@@ -134,6 +149,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="BgR-jz-sef" customClass="HomeTabBarController" customModule="WeatherStoryboard" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0nU-Ws-ZJ2">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
