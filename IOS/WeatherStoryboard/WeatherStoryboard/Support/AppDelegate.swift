@@ -13,9 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let dataManager = DataManager()
         let viewModel = WeatherSummaryViewModel(weatherFetcher: dataManager)
+        let fiveDayWeatherViewModel = FiveDayWeatherViewModel(weatherFetcher: dataManager)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let tabBarController = storyboard.instantiateInitialViewController() as? UITabBarController
         (tabBarController?.viewControllers?[0] as? HomeViewController)?.weatherSummaryViewModel = viewModel
+        (tabBarController?.viewControllers?[1] as? CurrentViewController)?.fiveDayWeatherViewModel = fiveDayWeatherViewModel
+        
     
         self.window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = tabBarController

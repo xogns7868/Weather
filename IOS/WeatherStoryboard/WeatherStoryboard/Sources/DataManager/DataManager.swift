@@ -11,6 +11,8 @@ import Combine
 
 protocol WeatherFetcher {
   func weatherSummary(forCity city: String) -> AnyPublisher<WeatherSummary, WeatherError>
+    
+    func fiveDayWeatherSummary(forCity city: String) -> AnyPublisher<FiveDayWeatherSummary, WeatherError>
 }
 
 class DataManager {
@@ -43,6 +45,29 @@ extension DataManager: WeatherFetcher {
           }.eraseToAnyPublisher()
       }.eraseToAnyPublisher()
   }
+    
+    func fiveDayWeatherSummary(forCity city: String) -> AnyPublisher<FiveDayWeatherSummary, WeatherError> {
+      getCoordinates(forAddressString: city)
+        .flatMap { [weak self] coordinates ->
+            AnyPublisher<URLSession.DataTaskPublisher.Output, WeatherError> in
+          guard let self = self,
+            let url = self.makeFiveDayWeatherSummaryComponents(withCoordinates: coordinates).url else {
+              return Fail(error: WeatherError.network(message: "Could not create URL"))
+                .eraseToAnyPublisher()
+          }
+          return self.session.dataTaskPublisher(for: URLRequest(url: url))
+            .mapError { WeatherError.network(message: $0.localizedDescription) }
+            .eraseToAnyPublisher()
+        }.flatMap { pair in
+          Just(pair.data)
+            .decode(type: FiveDayWeatherResponse.self, decoder: JSONDecoder())
+            .mapError { error in
+                WeatherError.parsing(message: "\(error)")
+            }.map { response in
+              FiveDayWeatherSummary.convert(fromResponse: response)
+            }.eraseToAnyPublisher()
+        }.eraseToAnyPublisher()
+    }
 }
 
 private extension DataManager {
@@ -66,6 +91,20 @@ private extension DataManager {
     
     return components
   }
+    
+    func makeFiveDayWeatherSummaryComponents(withCoordinates coordinates: CLLocationCoordinate2D) -> URLComponents {
+        var components = URLComponents()
+        components.scheme = OpenWeatherAPI.scheme
+        components.host = OpenWeatherAPI.host
+        components.path = OpenWeatherAPI.path + "/forecast"
+        
+        components.queryItems = [
+          .init(name: "lat", value: "\(coordinates.latitude)"),
+          .init(name: "lon", value: "\(coordinates.longitude)"),
+          .init(name: "appid", value: OpenWeatherAPI.key)]
+        
+        return components
+    }
   
   func getCoordinates(forAddressString addressString: String) -> AnyPublisher<CLLocationCoordinate2D, WeatherError> {
     let geocoder = CLGeocoder()
