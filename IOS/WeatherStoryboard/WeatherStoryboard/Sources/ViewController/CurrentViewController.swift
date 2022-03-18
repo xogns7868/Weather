@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import MaterialComponents.MaterialBottomSheet
 
 class CurrentViewController: UIViewController {
     
@@ -16,6 +17,8 @@ class CurrentViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var currentDateLabel: UILabel!
     @IBOutlet weak var selectedDateLabel: UILabel!
+    @IBOutlet weak var bottomSheetOpenButton: UIButton!
+    
     var timer: Timer? = nil
     let dateFormat = DateFormatter()
     
@@ -33,12 +36,30 @@ class CurrentViewController: UIViewController {
             guard let date = selectedDate else {
                 return
             }
-            
-            result?.threeHourly.forEach { item in
-                print("\(selectedDateFormat.string(from: date)) \(item.dtTxt), \(item.temp)")
-                print("\(selectedDateFormat.string(from: date) == item.dtTxt)")
+            guard let selectedResult = result?.threeHourly.filter({ item in
+                item.dtTxt == selectedDateFormat.string(from: date)
+            }).first else {
+                return
             }
+            print("\(selectedResult.dtTxt) \(selectedResult.temp.celsius)")
         }.store(in: &cancellables)
+    }
+    
+    @IBAction func onClick(_ sender: Any) {
+            let myViewController = BottomViewController()
+            
+            let bottomSheetViewModel = BRQBottomSheetViewModel(
+                cornerRadius: 20,
+                animationTransitionDuration: 0.3,
+                backgroundColor: UIColor.red.withAlphaComponent(0.5)
+            )
+            
+            let bottomSheetVC = BottomSheetViewController(
+                viewModel: bottomSheetViewModel,
+                childViewController: myViewController
+            )
+            
+            presentBottomSheet(bottomSheetVC, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

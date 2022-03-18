@@ -20,7 +20,7 @@ struct FiveDayWeatherSummary {
 struct ThreeHourlySummary {
     let dt: Int
     let weather: [WeatherDetails]
-    let temp: Double
+    let temp: Temperature
     let dtTxt: String
     let rain: Double?
     
@@ -30,7 +30,7 @@ struct ThreeHourlySummary {
             weather: response.weather.map { weatherResponse in
                 WeatherDetails.convert(fromResponse: weatherResponse)
             },
-            temp: response.main.temp,
+            temp: .init(kelvin: response.main.temp),
             dtTxt: response.dtTxt,
             rain: response.rain?.the3H
         )

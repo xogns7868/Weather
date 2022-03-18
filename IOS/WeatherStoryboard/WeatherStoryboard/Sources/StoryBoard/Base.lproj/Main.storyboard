@@ -119,10 +119,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcd-ft-z4Z">
+                                <rect key="frame" x="164" y="360" width="86" height="30"/>
+                                <state key="normal" title="바텀 시트 오픈"/>
+                                <connections>
+                                    <action selector="onClick:" destination="laG-od-U5r" eventType="touchUpInside" id="NpG-Fh-NgN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3Hn-qN-wTq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="pcd-ft-z4Z" firstAttribute="top" secondItem="rDd-BY-VZZ" secondAttribute="bottom" constant="50" id="921-80-tr6"/>
                             <constraint firstItem="Tci-5o-5Yk" firstAttribute="top" secondItem="rDd-BY-VZZ" secondAttribute="bottom" constant="100" id="9qy-q6-cXT"/>
                             <constraint firstItem="rDd-BY-VZZ" firstAttribute="trailing" secondItem="3Hn-qN-wTq" secondAttribute="trailing" id="A3a-VO-rAW"/>
                             <constraint firstItem="HF1-jX-O8R" firstAttribute="leading" secondItem="3Hn-qN-wTq" secondAttribute="leading" constant="50" id="AXT-zF-mTf"/>
@@ -130,10 +138,12 @@
                             <constraint firstItem="rDd-BY-VZZ" firstAttribute="top" secondItem="3Hn-qN-wTq" secondAttribute="top" constant="50" id="Po6-UZ-fue"/>
                             <constraint firstItem="rDd-BY-VZZ" firstAttribute="leading" secondItem="3Hn-qN-wTq" secondAttribute="leading" id="jcR-TD-xqV"/>
                             <constraint firstItem="HF1-jX-O8R" firstAttribute="top" secondItem="Tci-5o-5Yk" secondAttribute="bottom" constant="50" id="jvH-XG-fUX"/>
+                            <constraint firstItem="pcd-ft-z4Z" firstAttribute="centerX" secondItem="az6-Z3-OOu" secondAttribute="centerX" id="qif-3R-aqq"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="MzG-WM-P8S"/>
                     <connections>
+                        <outlet property="bottomSheetOpenButton" destination="pcd-ft-z4Z" id="C2C-GB-CP6"/>
                         <outlet property="currentDateLabel" destination="HF1-jX-O8R" id="m42-5I-SNJ"/>
                         <outlet property="datePicker" destination="rDd-BY-VZZ" id="V7i-yJ-fEu"/>
                         <outlet property="selectedDateLabel" destination="Tci-5o-5Yk" id="htw-2y-pPM"/>
@@ -161,6 +171,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4dg-gk-nPq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="82.608695652173921" y="116.51785714285714"/>
+        </scene>
+        <!--Bottom View Controller-->
+        <scene sceneID="k9J-iW-9V3">
+            <objects>
+                <viewController storyboardIdentifier="BottomViewController" id="Vf4-K6-mZf" customClass="BottomViewController" customModule="WeatherStoryboard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lJB-ty-dt4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8iW-lb-eX4">
+                                <rect key="frame" x="0.0" y="696" width="414" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="PaV-bJ-exj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kQb-Y6-wRb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8iW-lb-eX4" firstAttribute="trailing" secondItem="kQb-Y6-wRb" secondAttribute="trailing" id="5Pa-xe-wrv"/>
+                            <constraint firstItem="8iW-lb-eX4" firstAttribute="leading" secondItem="kQb-Y6-wRb" secondAttribute="leading" id="TTT-IC-wKN"/>
+                            <constraint firstItem="8iW-lb-eX4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kQb-Y6-wRb" secondAttribute="top" constant="40" id="jOM-Bh-qTg"/>
+                            <constraint firstAttribute="bottom" secondItem="8iW-lb-eX4" secondAttribute="bottom" id="x2E-dS-LMj"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j6d-qI-ef0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="419" y="942"/>
         </scene>
     </scenes>
     <resources>

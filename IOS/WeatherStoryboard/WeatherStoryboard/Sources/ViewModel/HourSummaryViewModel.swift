@@ -13,7 +13,7 @@ class HourSummaryViewModel: Identifiable {
   var id = UUID()
   
   var tempFmt: String {
-    String(format: "%.0fº", hourSummary.actualTemp.fahrenheight)
+    String(format: "%.0fº", hourSummary.actualTemp.celsius)
   }
   
 //  var icon: Image? {
