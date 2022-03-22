@@ -126,6 +126,10 @@
                                     <action selector="onClick:" destination="laG-od-U5r" eventType="touchUpInside" id="NpG-Fh-NgN"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RrK-4P-Gre">
+                                <rect key="frame" x="0.0" y="74" width="414" height="739"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3Hn-qN-wTq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -135,7 +139,11 @@
                             <constraint firstItem="rDd-BY-VZZ" firstAttribute="trailing" secondItem="3Hn-qN-wTq" secondAttribute="trailing" id="A3a-VO-rAW"/>
                             <constraint firstItem="HF1-jX-O8R" firstAttribute="leading" secondItem="3Hn-qN-wTq" secondAttribute="leading" constant="50" id="AXT-zF-mTf"/>
                             <constraint firstItem="Tci-5o-5Yk" firstAttribute="leading" secondItem="3Hn-qN-wTq" secondAttribute="leading" constant="50" id="FUg-Yc-JUp"/>
+                            <constraint firstItem="3Hn-qN-wTq" firstAttribute="bottom" secondItem="RrK-4P-Gre" secondAttribute="bottom" id="K4u-xq-s0z"/>
+                            <constraint firstItem="3Hn-qN-wTq" firstAttribute="trailing" secondItem="RrK-4P-Gre" secondAttribute="trailing" id="P0t-n5-XqO"/>
                             <constraint firstItem="rDd-BY-VZZ" firstAttribute="top" secondItem="3Hn-qN-wTq" secondAttribute="top" constant="50" id="Po6-UZ-fue"/>
+                            <constraint firstItem="RrK-4P-Gre" firstAttribute="top" secondItem="3Hn-qN-wTq" secondAttribute="top" constant="30" id="cjl-xe-zxg"/>
+                            <constraint firstItem="RrK-4P-Gre" firstAttribute="leading" secondItem="3Hn-qN-wTq" secondAttribute="leading" id="i8p-da-G5a"/>
                             <constraint firstItem="rDd-BY-VZZ" firstAttribute="leading" secondItem="3Hn-qN-wTq" secondAttribute="leading" id="jcR-TD-xqV"/>
                             <constraint firstItem="HF1-jX-O8R" firstAttribute="top" secondItem="Tci-5o-5Yk" secondAttribute="bottom" constant="50" id="jvH-XG-fUX"/>
                             <constraint firstItem="pcd-ft-z4Z" firstAttribute="centerX" secondItem="az6-Z3-OOu" secondAttribute="centerX" id="qif-3R-aqq"/>
@@ -144,6 +152,8 @@
                     <tabBarItem key="tabBarItem" title="Item" id="MzG-WM-P8S"/>
                     <connections>
                         <outlet property="bottomSheetOpenButton" destination="pcd-ft-z4Z" id="C2C-GB-CP6"/>
+                        <outlet property="cardView" destination="RrK-4P-Gre" id="WWd-rC-Uk9"/>
+                        <outlet property="cardViewTopConstraint" destination="cjl-xe-zxg" id="06v-Nb-eIw"/>
                         <outlet property="currentDateLabel" destination="HF1-jX-O8R" id="m42-5I-SNJ"/>
                         <outlet property="datePicker" destination="rDd-BY-VZZ" id="V7i-yJ-fEu"/>
                         <outlet property="selectedDateLabel" destination="Tci-5o-5Yk" id="htw-2y-pPM"/>
@@ -152,6 +162,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w8u-Jh-T67" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1124.6376811594205" y="941.51785714285711"/>
+        </scene>
+        <!--Reaction View Controller-->
+        <scene sceneID="LO9-7u-NBG">
+            <objects>
+                <viewController storyboardIdentifier="ReactionViewController" id="d5t-FE-NnG" customClass="ReactionViewController" customModule="WeatherStoryboard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ryI-MX-oJ8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPI-AC-HWU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCk-Yd-b3b">
+                                <rect key="frame" x="0.0" y="74" width="414" height="822"/>
+                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gCu-NX-kOu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xPI-AC-HWU" secondAttribute="trailing" id="67C-hf-QKB"/>
+                            <constraint firstAttribute="bottom" secondItem="xPI-AC-HWU" secondAttribute="bottom" id="M2J-cl-fGO"/>
+                            <constraint firstAttribute="bottom" secondItem="BCk-Yd-b3b" secondAttribute="bottom" id="McP-s1-Jx8"/>
+                            <constraint firstItem="xPI-AC-HWU" firstAttribute="leading" secondItem="ryI-MX-oJ8" secondAttribute="leading" id="Qqx-pT-LIQ"/>
+                            <constraint firstItem="gCu-NX-kOu" firstAttribute="trailing" secondItem="BCk-Yd-b3b" secondAttribute="trailing" id="aBr-6a-GDh"/>
+                            <constraint firstItem="BCk-Yd-b3b" firstAttribute="top" secondItem="gCu-NX-kOu" secondAttribute="top" constant="30" id="lha-yZ-skW"/>
+                            <constraint firstItem="BCk-Yd-b3b" firstAttribute="leading" secondItem="ryI-MX-oJ8" secondAttribute="leading" id="ugD-oh-QaU"/>
+                            <constraint firstItem="xPI-AC-HWU" firstAttribute="top" secondItem="ryI-MX-oJ8" secondAttribute="top" id="zRi-KV-umG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cardView" destination="BCk-Yd-b3b" id="1LB-t3-2Dj"/>
+                        <outlet property="cardViewTopConstraint" destination="lha-yZ-skW" id="Fwn-Pz-GrG"/>
+                        <outlet property="dim" destination="xPI-AC-HWU" id="CMD-lK-cDY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ssQ-yq-xeX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1810" y="942"/>
         </scene>
         <!--Home Tab Bar Controller-->
         <scene sceneID="rwT-f2-dSw">
@@ -175,7 +225,7 @@
         <!--Bottom View Controller-->
         <scene sceneID="k9J-iW-9V3">
             <objects>
-                <viewController storyboardIdentifier="BottomViewController" id="Vf4-K6-mZf" customClass="BottomViewController" customModule="WeatherStoryboard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BottomViewController" id="Vf4-K6-mZf" customClass="MDCBottomViewController" customModule="WeatherStoryboard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lJB-ty-dt4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -209,6 +259,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
