@@ -1,23 +1,21 @@
 //
-//  OneCallResponse.swift
+//  OneCallDto.swift
 //  WeatherStoryboard
 //
-//  Created by xogns.7868 on 2021/12/25.
+//  Created by tom.7868 on 2022/03/30.
 //
 
 import Foundation
 
-// MARK: - OneCallResponse
-struct OneCallResponse: Codable {
-  let lat, lon: Double
-  let timezone: String
-  let current: CurrentResponse
-  let hourly: [HourlyResponse]
-  let daily: [DailyResponse]
+struct OneCallDto: Codable {
+    let lat, lon: Double
+    let timezone: String
+    let current: CurrentDto
+    let hourly: [HourlyDto]
+    let daily: [DailyDto]
 }
 
-// MARK: - CurrentResponse
-struct CurrentResponse: Codable {
+struct CurrentDto: Codable {
   let dt, sunrise, sunset: Int
   let temp, feelsLike: Double
   let pressure, humidity: Int
@@ -25,8 +23,8 @@ struct CurrentResponse: Codable {
   let clouds, visibility: Int?
   let windSpeed: Double
   let windDeg: Int
-  let weather: [WeatherResponse]
-  let rain: RainResponse?
+  let weather: [WeatherDto]
+  let rain: RainDto?
   
   enum CodingKeys: String, CodingKey {
     case dt, sunrise, sunset, temp
@@ -38,36 +36,15 @@ struct CurrentResponse: Codable {
   }
 }
 
-// MARK: - RainResponse
-struct RainResponse: Codable {
-  let the1H: Double?
-  
-  enum CodingKeys: String, CodingKey {
-    case the1H = "1h"
-  }
-}
-
-// MARK: - WeatherResponse
-struct WeatherResponse: Codable {
-  let id: Int
-  let main, weatherDescription, icon: String
-  
-  enum CodingKeys: String, CodingKey {
-    case id, main
-    case weatherDescription = "description"
-    case icon
-  }
-}
-
 // MARK: - DailyResponse
-struct DailyResponse: Codable {
+struct DailyDto: Codable {
   let dt, sunrise, sunset: Int
-  let temp: TempResponse
-  let feelsLike: FeelsLikeResponse
+  let temp: TempDto
+  let feelsLike: FeelsLikeDto
   let pressure, humidity: Int
   let windSpeed: Double
   let windDeg: Int
-  let weather: [WeatherResponse]
+  let weather: [WeatherDto]
   let clouds: Int
   let rain: Double?
   let uvi: Double
@@ -83,25 +60,25 @@ struct DailyResponse: Codable {
 }
 
 // MARK: - FeelsLikeResponse
-struct FeelsLikeResponse: Codable {
+struct FeelsLikeDto: Codable {
   let day, night, eve, morn: Double
 }
 
 // MARK: - TempResponse
-struct TempResponse: Codable {
+struct TempDto: Codable {
   let day, min, max, night: Double
   let eve, morn: Double
 }
 
 // MARK: - HourlyResponse
-struct HourlyResponse: Codable {
+struct HourlyDto: Codable {
   let dt: Int
   let temp, feelsLike: Double
   let pressure, humidity, clouds: Int
   let windSpeed: Double
   let windDeg: Int
-  let weather: [WeatherResponse]
-  let rain: RainResponse?
+  let weather: [WeatherDto]
+  let rain: RainDto?
   
   enum CodingKeys: String, CodingKey {
     case dt, temp

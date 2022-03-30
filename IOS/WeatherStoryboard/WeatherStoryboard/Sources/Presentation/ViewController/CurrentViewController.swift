@@ -50,7 +50,6 @@ class CurrentViewController: UIViewController {
            let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom {
             cardViewTopConstraint.constant = safeAreaHeight + bottomPadding
         }
-        
         let viewPan = UIPanGestureRecognizer(target: self, action: #selector(viewPanned(_:)))
         
         // by default iOS will delay the touch before recording the drag/pan information
@@ -58,8 +57,7 @@ class CurrentViewController: UIViewController {
         viewPan.delaysTouchesBegan = false
         viewPan.delaysTouchesEnded = false
         
-        self.view.addGestureRecognizer(viewPan)
-        
+        self.cardView.addGestureRecognizer(viewPan)
         fiveDayWeatherViewModel.$fiveDayWeatherSummary.sink { result in
             let selectedDateFormat = DateFormatter()
             selectedDateFormat.locale = Locale(identifier: "ko_KR")
@@ -81,8 +79,8 @@ class CurrentViewController: UIViewController {
         // how much distance has user dragged the card view
         // positive number means user dragged downward
         // negative number means user dragged upward
-        let translation = panRecognizer.translation(in: self.view)
-        let velocity = panRecognizer.velocity(in: self.view)
+        let translation = panRecognizer.translation(in: self.cardView)
+        let velocity = panRecognizer.velocity(in: self.cardView)
         
         switch panRecognizer.state {
         case .began:
@@ -145,7 +143,7 @@ class CurrentViewController: UIViewController {
         // openCustomBottomSheet()
         // MDC BottomSheet Open
         // MDCBottomSheetOpen()
-        showCard()
+//        showCard()
     }
     
     private func openCustomBottomSheet() {

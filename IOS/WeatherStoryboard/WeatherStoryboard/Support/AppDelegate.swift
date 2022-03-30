@@ -11,9 +11,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let dataManager = DataManager()
-        let viewModel = WeatherSummaryViewModel(weatherFetcher: dataManager)
-        let fiveDayWeatherViewModel = FiveDayWeatherViewModel(weatherFetcher: dataManager)
+        let weatherDatasource = WeatherDatasource()
+        let viewModel = WeatherSummaryViewModel(weatherFetcher: weatherDatasource)
+        let fiveDayWeatherViewModel = FiveDayWeatherViewModel(weatherFetcher: weatherDatasource)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let tabBarController = storyboard.instantiateInitialViewController() as? UITabBarController
         (tabBarController?.viewControllers?[0] as? HomeViewController)?.weatherSummaryViewModel = viewModel
