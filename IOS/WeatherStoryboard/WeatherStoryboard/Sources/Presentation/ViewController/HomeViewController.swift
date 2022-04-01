@@ -12,7 +12,7 @@ class HomeViewController: UIViewController,
                           UITextFieldDelegate {
     
     var weatherSummaryViewModel: WeatherSummaryViewModel!
-//    var currentSummaryViewModel: CurrentSummaryViewModel!
+    //    var currentSummaryViewModel: CurrentSummaryViewModel!
     
     private var cancellables: Set<AnyCancellable> = []
     

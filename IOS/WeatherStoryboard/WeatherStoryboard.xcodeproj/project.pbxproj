@@ -44,6 +44,8 @@
 		B870614F279BFD5500DFB70B /* DaySummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870614E279BFD5500DFB70B /* DaySummaryViewModel.swift */; };
 		B8706151279BFD6B00DFB70B /* HourSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8706150279BFD6B00DFB70B /* HourSummaryViewModel.swift */; };
 		B880CF2027E0BDC20020D681 /* FiveDayWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B880CF1F27E0BDC20020D681 /* FiveDayWeatherViewModel.swift */; };
+		B8C2C2CB27F721270095F034 /* DIFramework.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C2C2CA27F721270095F034 /* DIFramework.swift */; };
+		B8C2C2CE27F7248A0095F034 /* WeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C2C2CD27F7248A0095F034 /* WeatherRepository.swift */; };
 		B8D3CE5B27B7CD03007D2BC5 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D3CE5A27B7CD03007D2BC5 /* CustomTableViewCell.swift */; };
 		B8EC953827DB86C300CAA8D4 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC953727DB86C300CAA8D4 /* HomeTabBarController.swift */; };
 /* End PBXBuildFile section */
@@ -113,6 +115,8 @@
 		B870614E279BFD5500DFB70B /* DaySummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySummaryViewModel.swift; sourceTree = "<group>"; };
 		B8706150279BFD6B00DFB70B /* HourSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourSummaryViewModel.swift; sourceTree = "<group>"; };
 		B880CF1F27E0BDC20020D681 /* FiveDayWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayWeatherViewModel.swift; sourceTree = "<group>"; };
+		B8C2C2CA27F721270095F034 /* DIFramework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIFramework.swift; sourceTree = "<group>"; };
+		B8C2C2CD27F7248A0095F034 /* WeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepository.swift; sourceTree = "<group>"; };
 		B8D3CE5A27B7CD03007D2BC5 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		B8EC953727DB86C300CAA8D4 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		DD32ED42C64C6B72809A29B8 /* Pods-WeatherStoryboard-WeatherStoryboardUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherStoryboard-WeatherStoryboardUITests.release.xcconfig"; path = "Target Support Files/Pods-WeatherStoryboard-WeatherStoryboardUITests/Pods-WeatherStoryboard-WeatherStoryboardUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 		B827426527F488E4004B1108 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				B8C2C2CC27F724790095F034 /* Repository */,
 				B827427927F49242004B1108 /* Remote */,
 				B827427827F49232004B1108 /* DataSource */,
 				B827426827F48912004B1108 /* Dto */,
@@ -297,6 +302,7 @@
 				B827426727F488FC004B1108 /* Presentation */,
 				B827426627F488F4004B1108 /* Domain */,
 				B827426527F488E4004B1108 /* Data */,
+				B8C2C2CA27F721270095F034 /* DIFramework.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -346,6 +352,14 @@
 				B880CF1F27E0BDC20020D681 /* FiveDayWeatherViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B8C2C2CC27F724790095F034 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				B8C2C2CD27F7248A0095F034 /* WeatherRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -591,6 +605,7 @@
 				B827427327F48B73004B1108 /* RainDto.swift in Sources */,
 				B842132027EA076900F1238A /* ReactionViewController.swift in Sources */,
 				B827427127F48ADC004B1108 /* WindDto.swift in Sources */,
+				B8C2C2CB27F721270095F034 /* DIFramework.swift in Sources */,
 				B83E619427774A7C006B23DD /* CurrentViewController.swift in Sources */,
 				B81AF11F27E4AD9E00360BD6 /* BottomSheetViewController.swift in Sources */,
 				B870614D279BFD4200DFB70B /* CurrentSummaryViewModel.swift in Sources */,
@@ -606,6 +621,7 @@
 				B83E618E27774881006B23DD /* WeatherSummary.swift in Sources */,
 				B81AF12127E4B58C00360BD6 /* BottomViewController.swift in Sources */,
 				B848EEC727DE04EA005C8038 /* FiveDayWeatherDto.swift in Sources */,
+				B8C2C2CE27F7248A0095F034 /* WeatherRepository.swift in Sources */,
 				B83E615027774781006B23DD /* AppDelegate.swift in Sources */,
 				B827427527F490B2004B1108 /* WeatherDetails.swift in Sources */,
 				B80409CE2792D63300A973B8 /* RoundedTextField.swift in Sources */,
