@@ -12,29 +12,31 @@ class ReactionViewController: UIViewController {
     
     @IBOutlet weak var dim: UIView!
     @IBOutlet weak var cardView: UIView!
-    @IBOutlet weak var cardViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contentBottomPaddingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cardViewHeightConstraint: NSLayoutConstraint!
     // IBOutlet here ...
     
     enum CardViewState {
-        case expanded
-        case normal
+        case fullExpanded
+        case halfExpanded
+        case collapsed
     }
+
     
-    var cardViewState : CardViewState = .normal
+    var cardViewState : CardViewState = .collapsed
     
     // to store the card view top constraint value before the dragging start
     // default is 30 pt from safe area top
-    var cardPanStartingTopConstant : CGFloat = 30.0
+    var cardPanStartingConstant : CGFloat = 30.0
     
     override func viewDidLoad() {
+        view.backgroundColor = UIColor.clear
+        view.isOpaque = false
         cardView.clipsToBounds = true
         cardView.layer.cornerRadius = 10.0
         cardView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
-        if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height,
-           let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom {
-            cardViewTopConstraint.constant = safeAreaHeight + bottomPadding
-        }
         
         let viewPan = UIPanGestureRecognizer(target: self, action: #selector(viewPanned(_:)))
         
@@ -61,31 +63,30 @@ class ReactionViewController: UIViewController {
         
         switch panRecognizer.state {
         case .began:
-            cardPanStartingTopConstant = cardViewTopConstraint.constant
+            cardPanStartingConstant = cardViewHeightConstraint.constant
         case .changed :
-            if self.cardPanStartingTopConstant + translation.y > 30.0 {
-                self.cardViewTopConstraint.constant = self.cardPanStartingTopConstant + translation.y
+            if self.cardPanStartingConstant - translation.y < self.view.frame.height - 30 {
+                self.cardViewHeightConstraint.constant = self.cardPanStartingConstant - translation.y
             }
-            self.dim.alpha = dimAlphaWithCardTopConstraint(value: self.cardViewTopConstraint.constant)
         case .ended :
             if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height,
                let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom {
                 
-                if self.cardViewTopConstraint.constant < (safeAreaHeight + bottomPadding) * 0.25 {
-                    showCard(atState: .expanded)
-                } else if self.cardViewTopConstraint.constant < (safeAreaHeight) - 70 {
-                    showCard(atState: .normal)
+                if self.cardViewHeightConstraint.constant > (safeAreaHeight + bottomPadding) * 0.75 {
+                    showCard(atState: .fullExpanded)
+                } else if self.cardViewHeightConstraint.constant > (safeAreaHeight + bottomPadding) * 0.5 {
+                    showCard(atState: .halfExpanded)
                 } else {
-                    // hide the card and dismiss current view controller
+                    showCard(atState: .collapsed)
                 }
             }
+
         default:
             break
         }
-        print("user has dragged \(translation.y) point vertically")
     }
     
-    private func showCard(atState: CardViewState = .normal) {
+    private func showCard(atState: CardViewState = .collapsed) {
         
         // ensure there's no pending layout changes before animation runs
         self.view.layoutIfNeeded()
@@ -93,19 +94,17 @@ class ReactionViewController: UIViewController {
         // set the new top constraint value for card view
         // card view won't move up just yet, we need to call layoutIfNeeded()
         // to tell the app to refresh the frame/position of card view
-        if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height,
-           let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom {
+        if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height {
             
-            if atState == .expanded {
-                // if state is expanded, top constraint is 30pt away from safe area top
-                cardViewTopConstraint.constant = 30.0
+            if atState == .fullExpanded {
+                cardViewHeightConstraint.constant = safeAreaHeight - 30
+            } else if atState == .halfExpanded {
+                cardViewHeightConstraint.constant = safeAreaHeight / 2.0
             } else {
-                cardViewTopConstraint.constant = (safeAreaHeight + bottomPadding) / 2.0
+                cardViewHeightConstraint.constant = contentView.frame.height
             }
-            
-            cardPanStartingTopConstant = cardViewTopConstraint.constant
+            cardPanStartingConstant = cardViewHeightConstraint.constant
         }
-        
         // move card up from bottom
         // create a new property animator
         let showCard = UIViewPropertyAnimator(duration: 0.25, curve: .easeIn, animations: {
