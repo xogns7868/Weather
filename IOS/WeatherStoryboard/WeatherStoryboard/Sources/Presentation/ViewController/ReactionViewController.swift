@@ -68,6 +68,7 @@ class ReactionViewController: UIViewController {
             if self.cardPanStartingConstant - translation.y < self.view.frame.height - 30 {
                 self.cardViewHeightConstraint.constant = self.cardPanStartingConstant - translation.y
             }
+            self.dim.alpha = dimAlphaWithCardTopConstraint(value: self.cardViewHeightConstraint.constant)
         case .ended :
             if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height,
                let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom {
@@ -116,6 +117,7 @@ class ReactionViewController: UIViewController {
     }
     
     private func dimAlphaWithCardTopConstraint(value: CGFloat) -> CGFloat {
+        print(value)
         let fullDimAlpha : CGFloat = 0.7
         
         // ensure safe area height and safe area bottom padding is not nil
@@ -126,25 +128,25 @@ class ReactionViewController: UIViewController {
         
         // when card view top constraint value is equal to this,
         // the dimmer view alpha is dimmest (0.7)
-        let fullDimPosition = (safeAreaHeight + bottomPadding) / 2.0
+        let fullDimPosition = safeAreaHeight
         
         // when card view top constraint value is equal to this,
         // the dimmer view alpha is lightest (0.0)
-        let noDimPosition = safeAreaHeight + bottomPadding
+        let noDimPosition = CGFloat(0)
         
         // if card view top constraint is lesser than fullDimPosition
         // it is dimmest
-        if value < fullDimPosition {
+        if value > fullDimPosition {
             return fullDimAlpha
         }
         
         // if card view top constraint is more than noDimPosition
         // it is dimmest
-        if value > noDimPosition {
+        if value < noDimPosition {
             return 0.0
         }
         
         // else return an alpha value in between 0.0 and 0.7 based on the top constraint value
-        return fullDimAlpha * 1 - ((value - fullDimPosition) / fullDimPosition)
+        return value / fullDimPosition
     }
 }
