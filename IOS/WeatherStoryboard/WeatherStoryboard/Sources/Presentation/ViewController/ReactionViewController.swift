@@ -13,8 +13,7 @@ class ReactionViewController: UIViewController {
     @IBOutlet weak var dim: UIView!
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var contentBottomPaddingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var inputLabelView: UILabel!
     @IBOutlet weak var cardViewHeightConstraint: NSLayoutConstraint!
     // IBOutlet here ...
     
@@ -23,7 +22,7 @@ class ReactionViewController: UIViewController {
         case halfExpanded
         case collapsed
     }
-
+    
     
     var cardViewState : CardViewState = .collapsed
     
@@ -34,9 +33,9 @@ class ReactionViewController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = UIColor.clear
         view.isOpaque = false
-        cardView.clipsToBounds = true
-        cardView.layer.cornerRadius = 10.0
-        cardView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = 10.0
+        contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         let viewPan = UIPanGestureRecognizer(target: self, action: #selector(viewPanned(_:)))
         
@@ -45,7 +44,7 @@ class ReactionViewController: UIViewController {
         viewPan.delaysTouchesBegan = false
         viewPan.delaysTouchesEnded = false
         
-        self.view.addGestureRecognizer(viewPan)
+        self.contentView.addGestureRecognizer(viewPan)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,15 +72,16 @@ class ReactionViewController: UIViewController {
             if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height,
                let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom {
                 
-                if self.cardViewHeightConstraint.constant > (safeAreaHeight + bottomPadding) * 0.75 {
+                if self.cardViewHeightConstraint.constant > (safeAreaHeight + bottomPadding - self.contentView.frame.height) * 0.75 {
                     showCard(atState: .fullExpanded)
-                } else if self.cardViewHeightConstraint.constant > (safeAreaHeight + bottomPadding) * 0.5 {
+                } else if self.cardViewHeightConstraint.constant > (safeAreaHeight + bottomPadding - self.contentView.frame.height) *
+                            0.5 {
                     showCard(atState: .halfExpanded)
                 } else {
                     showCard(atState: .collapsed)
                 }
             }
-
+            
         default:
             break
         }
@@ -98,11 +98,11 @@ class ReactionViewController: UIViewController {
         if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height {
             
             if atState == .fullExpanded {
-                cardViewHeightConstraint.constant = safeAreaHeight - 30
+                cardViewHeightConstraint.constant = safeAreaHeight - 30 - self.contentView.frame.height
             } else if atState == .halfExpanded {
-                cardViewHeightConstraint.constant = safeAreaHeight / 2.0
+                cardViewHeightConstraint.constant = safeAreaHeight / 2.0 - self.contentView.frame.height
             } else {
-                cardViewHeightConstraint.constant = contentView.frame.height
+                cardViewHeightConstraint.constant = 0
             }
             cardPanStartingConstant = cardViewHeightConstraint.constant
         }
@@ -117,12 +117,10 @@ class ReactionViewController: UIViewController {
     }
     
     private func dimAlphaWithCardTopConstraint(value: CGFloat) -> CGFloat {
-        print(value)
         let fullDimAlpha : CGFloat = 0.7
         
         // ensure safe area height and safe area bottom padding is not nil
-        guard let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height,
-              let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom else {
+        guard let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height else {
             return fullDimAlpha
         }
         
