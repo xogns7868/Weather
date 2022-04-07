@@ -197,16 +197,26 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCk-Yd-b3b">
                                 <rect key="frame" x="0.0" y="862" width="414" height="0.0"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFe-yu-qyF">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFe-yu-qyF">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMQ-84-Cwv">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                 <constraints>
+                                    <constraint firstItem="eMQ-84-Cwv" firstAttribute="top" secondItem="wFe-yu-qyF" secondAttribute="bottom" id="365-gg-J8q"/>
+                                    <constraint firstItem="wFe-yu-qyF" firstAttribute="top" secondItem="BCk-Yd-b3b" secondAttribute="top" id="4UR-JH-qwR"/>
                                     <constraint firstAttribute="trailing" secondItem="wFe-yu-qyF" secondAttribute="trailing" id="CHt-ht-8wf"/>
-                                    <constraint firstAttribute="bottom" secondItem="wFe-yu-qyF" secondAttribute="bottom" id="eQM-96-8QP"/>
+                                    <constraint firstAttribute="bottom" secondItem="eMQ-84-Cwv" secondAttribute="bottom" id="SjW-CF-0TV"/>
+                                    <constraint firstItem="eMQ-84-Cwv" firstAttribute="leading" secondItem="BCk-Yd-b3b" secondAttribute="leading" id="azY-qi-PFe"/>
                                     <constraint firstItem="wFe-yu-qyF" firstAttribute="leading" secondItem="BCk-Yd-b3b" secondAttribute="leading" id="f5C-WB-tlZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="eMQ-84-Cwv" secondAttribute="trailing" id="rID-k6-jfv"/>
                                     <constraint firstAttribute="height" id="wuR-1f-Y8y"/>
                                 </constraints>
                             </view>
