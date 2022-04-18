@@ -14,6 +14,7 @@ public final class FiveDayWeatherViewModel: ObservableObject {
     
     @Published var searchText: String = ""
     @Published var fiveDayWeatherSummary: FiveDayWeatherSummary?
+    @Published var selectedWeatherInfo: SelectedWeatherInfo?
     
     //  var currentWeatherIcon: Image? {
     //    weatherSummary?.current.weatherDetails.first?.weatherIcon
@@ -47,4 +48,15 @@ public final class FiveDayWeatherViewModel: ObservableObject {
                 self?.fiveDayWeatherSummary = fiveDayWeatherSummary
             }.store(in: &disposable)
     }
+    
+    func updateSelectedDate(date: String, temperature: Double) {
+        selectedWeatherInfo = SelectedWeatherInfo(dtTxt: date, temperature: temperature)
+    }
+    
+    
+    struct SelectedWeatherInfo {
+        let dtTxt: String
+        let temperature: Double
+    }
+    
 }

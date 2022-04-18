@@ -41,6 +41,7 @@ class CurrentViewController: UIViewController {
             }).first else {
                 return
             }
+            self.fiveDayWeatherViewModel.updateSelectedDate(date: selectedResult.dtTxt, temperature: selectedResult.temp.celsius)
             print("\(selectedResult.dtTxt) \(selectedResult.temp.celsius)")
         }.store(in: &cancellables)
     }
@@ -55,8 +56,9 @@ class CurrentViewController: UIViewController {
     
     private func openDashboard() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let reactionViewController = storyboard.instantiateViewController(identifier: "ReactionViewController")
-
+        let reactionViewController = storyboard.instantiateViewController(identifier: "ReactionViewController") as ReactionViewController
+        
+        reactionViewController.fiveDayWeatherViewModel = fiveDayWeatherViewModel
         reactionViewController.modalPresentationStyle = .overCurrentContext
         present(reactionViewController, animated: true, completion: nil)
     }

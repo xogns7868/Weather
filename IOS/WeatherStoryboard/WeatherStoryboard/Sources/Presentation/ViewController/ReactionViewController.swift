@@ -7,14 +7,19 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class ReactionViewController: UIViewController {
     
-    @IBOutlet weak var dim: UIView!
+    var fiveDayWeatherViewModel: FiveDayWeatherViewModel!
+    private var cancellables: Set<AnyCancellable> = []
+    
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var inputLabelView: UILabel!
     @IBOutlet weak var cardViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var selectedDateTextView: UILabel!
+    @IBOutlet weak var selectedTemperatureTextView: UILabel!
     // IBOutlet here ...
     
     enum CardViewState {
@@ -31,6 +36,12 @@ class ReactionViewController: UIViewController {
     var cardPanStartingConstant : CGFloat = 30.0
     
     override func viewDidLoad() {
+        
+        fiveDayWeatherViewModel.$selectedWeatherInfo.sink { result in
+            self.selectedDateTextView.text = result?.dtTxt
+            self.selectedTemperatureTextView.text = "\(result?.temperature)"
+        }.store(in: &cancellables)
+        
         view.backgroundColor = UIColor.clear
         view.isOpaque = false
         contentView.clipsToBounds = true
@@ -67,7 +78,7 @@ class ReactionViewController: UIViewController {
             if self.cardPanStartingConstant - translation.y < self.view.frame.height - 30 {
                 self.cardViewHeightConstraint.constant = self.cardPanStartingConstant - translation.y
             }
-            self.dim.alpha = dimAlphaWithCardTopConstraint(value: self.cardViewHeightConstraint.constant)
+//            self.dim.alpha = dimAlphaWithCardTopConstraint(value: self.cardViewHeightConstraint.constant)
         case .ended :
             if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height,
                let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom {

@@ -36,7 +36,7 @@ struct ThreeHourlyDto: Codable {
     let pop: Double
     let sys: Sys
     let dtTxt: String
-    let rain, snow: RainDto?
+    let rain, snow: Rain3HDto?
 
     enum CodingKeys: String, CodingKey {
         case dt, main, weather, clouds, wind, visibility, pop, sys

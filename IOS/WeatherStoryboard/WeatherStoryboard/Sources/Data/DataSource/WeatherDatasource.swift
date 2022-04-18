@@ -41,10 +41,12 @@ class WeatherDatasource: WeatherFetcher {
     }
     
     func fiveDayWeatherSummary(coordinates: CLLocationCoordinate2D) -> AnyPublisher<FiveDayWeatherSummary, WeatherError> {
-        guard let url = makeWeatherSummaryComponents(withCoordinates: coordinates).url else {
+        print(coordinates)
+        guard let url = makeFiveDayWeatherSummaryComponents(withCoordinates: coordinates).url else {
             return Fail(error: WeatherError.network(message: "Could not create URL"))
                 .eraseToAnyPublisher()
         }
+        print(url)
         return self.session.dataTaskPublisher(for: URLRequest(url: url))
             .mapError { WeatherError.network(message: $0.localizedDescription)
             }.flatMap { pair in
