@@ -20,6 +20,7 @@ class ReactionViewController: UIViewController {
     @IBOutlet weak var cardViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var selectedDateTextView: UILabel!
     @IBOutlet weak var selectedTemperatureTextView: UILabel!
+    @IBOutlet weak var dimmerView: UIView!
     // IBOutlet here ...
     
     enum CardViewState {
@@ -47,6 +48,7 @@ class ReactionViewController: UIViewController {
         contentView.clipsToBounds = true
         contentView.layer.cornerRadius = 10.0
         contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        dimmerView.alpha = 0
         
         let viewPan = UIPanGestureRecognizer(target: self, action: #selector(viewPanned(_:)))
         
@@ -75,11 +77,18 @@ class ReactionViewController: UIViewController {
         case .began:
             cardPanStartingConstant = cardViewHeightConstraint.constant
         case .changed :
-            if self.cardPanStartingConstant - translation.y < self.view.frame.height - 30 {
-                self.cardViewHeightConstraint.constant = self.cardPanStartingConstant - translation.y
+            if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height {
+                if self.cardPanStartingConstant - translation.y < safeAreaHeight - 30 - self.contentView.frame.height {
+                    self.cardViewHeightConstraint.constant = self.cardPanStartingConstant - translation.y
+                }
             }
-//            self.dim.alpha = dimAlphaWithCardTopConstraint(value: self.cardViewHeightConstraint.constant)
+            self.dimmerView.alpha = dimAlphaWithCardTopConstraint(value: self.cardViewHeightConstraint.constant)
         case .ended :
+            if velocity.y > 1500.0 {
+                hideCardAndGoBack()
+                return
+            }
+            
             if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height,
                let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom {
                 
@@ -92,7 +101,6 @@ class ReactionViewController: UIViewController {
                     showCard(atState: .collapsed)
                 }
             }
-            
         default:
             break
         }
@@ -122,7 +130,9 @@ class ReactionViewController: UIViewController {
         let showCard = UIViewPropertyAnimator(duration: 0.25, curve: .easeIn, animations: {
             self.view.layoutIfNeeded()
         })
-        
+        showCard.addAnimations {
+            self.dimmerView.alpha = self.dimAlphaWithCardTopConstraint(value: self.cardViewHeightConstraint.constant)
+        }
         // run the animation
         showCard.startAnimation()
     }
@@ -157,5 +167,43 @@ class ReactionViewController: UIViewController {
         
         // else return an alpha value in between 0.0 and 0.7 based on the top constraint value
         return value / fullDimPosition
+    }
+    
+    private func hideCardAndGoBack() {
+        
+      // ensure there's no pending layout changes before animation runs
+      self.view.layoutIfNeeded()
+      
+      // set the new top constraint value for card view
+      // card view won't move down just yet, we need to call layoutIfNeeded()
+      // to tell the app to refresh the frame/position of card view
+      if let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height,
+        let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom {
+        
+        // move the card view to bottom of screen
+        cardViewHeightConstraint.constant = 0
+      }
+      
+      // move card down to bottom
+      // create a new property animator
+      let hideCard = UIViewPropertyAnimator(duration: 0.25, curve: .easeIn, animations: {
+        self.view.layoutIfNeeded()
+      })
+      
+      // hide dimmer view
+      // this will animate the dimmerView alpha together with the card move down animation
+      
+      // when the animation completes, (position == .end means the animation has ended)
+      // dismiss this view controller (if there is a presenting view controller)
+      hideCard.addCompletion({ position in
+        if position == .end {
+          if(self.presentingViewController != nil) {
+            self.dismiss(animated: false, completion: nil)
+          }
+        }
+      })
+      
+      // run the animation
+      hideCard.startAnimation()
     }
 }

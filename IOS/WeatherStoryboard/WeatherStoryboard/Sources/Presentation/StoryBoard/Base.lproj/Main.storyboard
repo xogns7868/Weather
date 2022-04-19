@@ -161,6 +161,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umM-eo-0za">
+                                <rect key="frame" x="0.0" y="44" width="414" height="740"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mu-a5-QiA">
                                 <rect key="frame" x="0.0" y="784" width="414" height="78"/>
                                 <subviews>
@@ -220,11 +224,15 @@
                         <viewLayoutGuide key="safeArea" id="gCu-NX-kOu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="9mu-a5-QiA" firstAttribute="top" secondItem="umM-eo-0za" secondAttribute="bottom" id="BWC-1I-szF"/>
                             <constraint firstItem="gCu-NX-kOu" firstAttribute="bottom" secondItem="BCk-Yd-b3b" secondAttribute="bottom" id="McP-s1-Jx8"/>
+                            <constraint firstItem="umM-eo-0za" firstAttribute="top" secondItem="ryI-MX-oJ8" secondAttribute="top" constant="44" id="TBi-oS-gqd"/>
                             <constraint firstItem="9mu-a5-QiA" firstAttribute="bottom" secondItem="BCk-Yd-b3b" secondAttribute="top" id="YMU-Me-XSi"/>
                             <constraint firstItem="gCu-NX-kOu" firstAttribute="trailing" secondItem="BCk-Yd-b3b" secondAttribute="trailing" id="aBr-6a-GDh"/>
                             <constraint firstAttribute="trailing" secondItem="9mu-a5-QiA" secondAttribute="trailing" id="dr1-rW-jKe"/>
                             <constraint firstItem="9mu-a5-QiA" firstAttribute="leading" secondItem="ryI-MX-oJ8" secondAttribute="leading" id="fWT-87-7Py"/>
+                            <constraint firstItem="umM-eo-0za" firstAttribute="leading" secondItem="gCu-NX-kOu" secondAttribute="leading" id="mIZ-eo-M7T"/>
+                            <constraint firstItem="gCu-NX-kOu" firstAttribute="trailing" secondItem="umM-eo-0za" secondAttribute="trailing" id="n3u-wo-V3I"/>
                             <constraint firstItem="BCk-Yd-b3b" firstAttribute="leading" secondItem="ryI-MX-oJ8" secondAttribute="leading" id="ugD-oh-QaU"/>
                         </constraints>
                     </view>
@@ -232,6 +240,7 @@
                         <outlet property="cardView" destination="BCk-Yd-b3b" id="1LB-t3-2Dj"/>
                         <outlet property="cardViewHeightConstraint" destination="wuR-1f-Y8y" id="jqg-Oc-pw6"/>
                         <outlet property="contentView" destination="9mu-a5-QiA" id="H1t-Fh-DkC"/>
+                        <outlet property="dimmerView" destination="umM-eo-0za" id="RBv-gx-scu"/>
                         <outlet property="selectedDateTextView" destination="cW4-UO-qy1" id="Iv1-Jy-Rx6"/>
                         <outlet property="selectedTemperatureTextView" destination="QPk-p8-T5T" id="Q0B-jM-wzB"/>
                     </connections>
